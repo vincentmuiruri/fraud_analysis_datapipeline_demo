@@ -1,7 +1,9 @@
-BANK FRAUD DETECTION PIPELINE
+**BANK FRAUD DETECTION PIPELINE**
 A comprehensive Snowflake data pipeline demonstrating real-time fraud detection using Dynamic Tables for automatic incremental refresh and multi-layer data architecture.
+
 📋 Overview
 This project showcases a production-ready fraud detection system built entirely in Snowflake, leveraging Dynamic Tables to automatically process and analyze transaction data without manual orchestration. The pipeline monitors banking transactions, identifies suspicious patterns, and provides analytics-ready data for fraud monitoring dashboards.
+
 🎯 Key Features
 
 Automatic Data Refresh: Dynamic Tables handle incremental updates without manual triggers
@@ -11,7 +13,9 @@ Dependency Management: Snowflake automatically tracks and refreshes dependent ta
 BI-Ready Analytics: Pre-aggregated tables optimized for dashboards and reporting
 
 🏗️ Architecture
+
 <img width="782" height="675" alt="image" src="https://github.com/user-attachments/assets/a3f9d7dc-cf92-4702-91cc-5e5db7abcbd3" />
+
 
 📦 Prerequisites
 
@@ -20,6 +24,7 @@ COMPUTE_WH warehouse (or modify warehouse name in code)
 Permission to create databases, schemas, tables, and dynamic tables
 
 🚀 Setup Instructions
+
 Step 1: Clone and Execute
 
 Copy the entire SQL script to your Snowflake worksheet
@@ -53,6 +58,7 @@ Execute the INSERT statements in Step 3 to populate the raw table.
 Dynamic Tables automatically refresh based on the TARGET_LAG parameter:
 TableTarget LagPurposetransactions_clean1 minuteNear real-time filtered datadaily_transaction_summary5 minutesBusiness metrics aggregationfraud_risk_summary2 minutesFraud monitoring metrics
 Target Lag indicates acceptable freshness delay. Snowflake determines optimal refresh timing and method (full or incremental).
+
 📊 Data Model
 transactions_raw (Source Table)
 Contains all incoming transaction data with fraud indicators:
@@ -89,6 +95,7 @@ sqlINSERT INTO fraud_demo.raw.transactions_raw VALUES
  'Online Store', 'RETAIL', 'Toronto', 'Canada', 
  'DEV005', '192.168.1.110', FALSE, 0.10, 'APPROVED');
 Wait for the target lag period (1-5 minutes depending on table), then query the dynamic tables to see the new data automatically propagated.
+
 📈 Analytics Queries
 The project includes ready-to-use queries for:
 
@@ -97,6 +104,7 @@ Fraud Risk by Country: Identify high-risk geographic regions
 High-Risk Countries Analysis: Aggregate fraud metrics for risk assessment
 
 Execute these queries from Step 7 of the script.
+
 🔍 Monitoring & Observability
 Check Dynamic Table Status
 sqlSHOW DYNAMIC TABLES IN DATABASE fraud_demo;
@@ -111,8 +119,8 @@ sqlSELECT
 FROM TABLE(INFORMATION_SCHEMA.DYNAMIC_TABLE_REFRESH_HISTORY(
     NAME => 'fraud_demo.analytics.transactions_clean'
 ));
-💡 Key Concepts Demonstrated
 
+💡 Key Concepts Demonstrated
 Incremental Processing: Dynamic Tables eliminate the need for streams and tasks
 Dependency Management: Snowflake tracks table dependencies automatically
 Layered Architecture: Separation of raw, clean, and analytics layers
@@ -122,7 +130,6 @@ No Manual Orchestration: Snowflake handles refresh scheduling and execution
 🛠️ Customization
 Adjust Refresh Frequency
 Modify the TARGET_LAG in CREATE DYNAMIC TABLE statements:
-
 Lower values = fresher data, higher compute costs
 Higher values = lower costs, less fresh data
 
@@ -130,14 +137,17 @@ Change Warehouse
 Replace WAREHOUSE = compute_wh with your warehouse name.
 Extend Analytics
 Add new dynamic tables following the same pattern to create additional aggregations or transformations.
+
 📝 Author
 Vincent Mbira
+
 📄 License
 This project is provided as-is for educational and demonstration purposes.
+
 🤝 Contributing
 Feel free to fork this project and adapt it for your specific fraud detection needs. Consider adding:
+- Additional fraud detection rules
+- Machine learning model integration
+- Alert mechanisms for high-risk transactions
 
-Additional fraud detection rules
-Machine learning model integration
-Alert mechanisms for high-risk transactions
 Historical trend analysis tables
