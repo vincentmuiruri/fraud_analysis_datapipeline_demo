@@ -135,8 +135,8 @@ Add new dynamic tables following the same pattern to create additional aggregati
 ***📝 Author:***
 *****Vincent Mbira*****
 
-***📄 License***
-This project is provided as-is for educational and demonstration purposes.
+***📄 License:***
+This project is provided as-is for educational and demonstration purposes since the data used is synthetically generated.
 
 ***🤝 Contributing:***
 Feel free to fork this project and adapt it for your specific fraud detection needs. Consider adding:
